@@ -17,7 +17,7 @@ public class Book {
     private Integer bookId;
 
     @NotBlank(message = "Book title is mandatory")
-    @Column(name="title" ,length=50, nullable=false, unique=false)
+    @Column(name="title" ,length=50, nullable=false, unique=true)
     private String title;
 
     @Column(name="author")
@@ -38,17 +38,20 @@ public class Book {
     @Past(message="Date cannot be in the future")
     private Date published;
 
-
+    @Column(name="price")
+    @NotNull(message = "Price details should be given correctly")
+    private Double price;
     public Book() {
     }
 
-    public Book(Integer bookId, String title, String author, Integer pages, String description, Date published) {
+    public Book(Integer bookId, @NotBlank(message = "Book title is mandatory") String title, @NotBlank(message = "Author name is mandatory") String author, @NotNull(message = "It should not be empty") Integer pages, @NotBlank @Size(min = 3, max = 200, message = "description size should be between {min} and {max}") String description, @Past(message = "Date cannot be in the future") Date published, @Size(min = 10, max = 3000, message = "Price details should be given correctly") Double price) {
         this.bookId = bookId;
         this.title = title;
         this.author = author;
         this.pages = pages;
         this.description = description;
         this.published = published;
+        this.price = price;
     }
 
     public Integer getBookId() {
@@ -98,4 +101,13 @@ public class Book {
     public void setPublished(Date published) {
         this.published = published;
     }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
 }

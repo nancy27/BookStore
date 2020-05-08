@@ -9,17 +9,31 @@ public class BookDto {
     private Integer pages;
     private String description;
     private Date published;
+    private double price;
+    private Integer quantity;
 
     public BookDto() {
     }
 
-    public BookDto(Integer bookId, String title, String author, Integer pages, String description, Date published) {
+    public BookDto(Integer bookId, String title, String author, Integer pages, String description, Date published, double price) {
         this.bookId = bookId;
         this.title = title;
         this.author = author;
         this.pages = pages;
         this.description = description;
         this.published = published;
+        this.price = price;
+    }
+
+    public BookDto(Integer bookId, String title, String author, Integer pages, String description, Date published, double price, Integer quantity) {
+        this.bookId = bookId;
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.description = description;
+        this.published = published;
+        this.price = price;
+        this.quantity = quantity;
     }
 
     public Integer getBookId() {
@@ -68,5 +82,25 @@ public class BookDto {
 
     public void setPublished(Date published) {
         this.published = published;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 }

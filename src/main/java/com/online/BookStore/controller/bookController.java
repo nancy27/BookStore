@@ -20,12 +20,12 @@ public class bookController {
     BookService bookService;
 
     @RequestMapping(method = RequestMethod.POST,value="/addbook")
-    public String addBook(@Valid @RequestBody Book book){
+    public String addBook(@Valid @RequestBody Book book) throws Exception {
         return bookService.addBook(book);
     }
 
     @RequestMapping(method = RequestMethod.POST, value="/addManyBooks")
-    public String addManyBooks(@Valid @RequestBody List<Book> bookList){
+    public String addManyBooks(@Valid @RequestBody List<Book> bookList) {
         return bookService.addManyBooks(bookList);
     }
 
