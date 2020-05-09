@@ -294,6 +294,5 @@ class OrderServiceTest extends Specification {
         orderService.updatingOrder(orderRequest)
         then:
         thrown(DataNotFoundException)
-
     }
 }

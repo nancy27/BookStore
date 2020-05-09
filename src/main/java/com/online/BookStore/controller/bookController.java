@@ -25,7 +25,7 @@ public class bookController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value="/addManyBooks")
-    public String addManyBooks(@Valid @RequestBody List<Book> bookList) {
+    public String addManyBooks(@Valid @RequestBody List<Book> bookList) throws Exception {
         return bookService.addManyBooks(bookList);
     }
 

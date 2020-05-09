@@ -4,7 +4,6 @@ import com.online.BookStore.Entity.Book;
 import com.online.BookStore.dto.BookDto;
 import com.online.BookStore.exception.DataNotFoundException;
 import com.online.BookStore.repository.BookRepository;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +19,11 @@ public class BookService {
     @Autowired
     BookRepository bookRepository;
 
-   public String addBook(Book book) throws Exception {
+    public BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
+
+    public String addBook(Book book) throws Exception {
        String title= book.getTitle();
        Optional<Book> retrievedBook = bookRepository.findByTitle(title);
        if(retrievedBook.isPresent()){
@@ -30,8 +33,9 @@ public class BookService {
        return "Saved Successfully";
    }
 
-    public BookDto getBookDetails(Integer bookId) throws NotFoundException {
-       Optional<Book> book = Optional.ofNullable(bookRepository.findByBookId(bookId));
+    public BookDto getBookDetails(Integer bookId)  {
+
+       Optional<Book> book = bookRepository.findByBookId(bookId);
        if(!book.isPresent()){
            throw new DataNotFoundException("Book is not present ");
        }
@@ -40,20 +44,37 @@ public class BookService {
                newBook.getPages(),newBook.getDescription(),newBook.getPublished(),newBook.getPrice());
     }
 
-    public String addManyBooks(List<Book> bookList) {
+    public String addManyBooks(List<Book> bookList) throws Exception {
+        List<String> title= new ArrayList<>();
+        for (int i = 0; i < bookList.size(); i++) {
+            title.add(i, bookList.get(i).getTitle());
+        }
+        String bookTitle ="";
+        Optional<List<Book>> retrievedBookOptional = bookRepository.findAllByTitle(title);
+        if(retrievedBookOptional.isPresent()){
+            List<Book> bookLis = retrievedBookOptional.get();
+            for (int i = 0; i < bookLis.size() ; i++) {
+               bookTitle= bookTitle+","+ bookLis.get(i).getTitle();
+            }
+            throw new Exception("Book "+ bookTitle +" is already present with the same title");
+        }
+
       try{
-       List<Book> bookList1=bookRepository.saveAll(bookList);}
+       List<Book> bookList1=bookRepository.saveAll(bookList);
+      }
       catch(ConstraintViolationException e){
           throw new ConstraintViolationException((Set<? extends ConstraintViolation<?>>) e);
       }
-       return "Saved all books! ";
+       return "Saved all books!";
     }
 
     public List<BookDto> getListOfBooks() {
-       List<Book> bookList=bookRepository.findAll();
-       if(bookList.isEmpty() || bookList ==null){
+
+       Optional<List<Book>> bookListOptional= Optional.ofNullable(bookRepository.findAll());
+       if((!bookListOptional.isPresent()) || (bookListOptional == null)){
            throw new DataNotFoundException("Books cannot be found");
        }
+          List<Book> bookList= bookListOptional.get();
        List<BookDto> bookDtoList=new ArrayList<>();
         for (int i = 0; i <bookList.size() ; i++) {
             Book newBook= bookList.get(i);
@@ -65,7 +86,7 @@ public class BookService {
     }
 
     public String deleteABook(Integer bookId) {
-        Optional<Book> optionalBook = Optional.ofNullable(bookRepository.findByBookId(bookId));
+        Optional<Book> optionalBook = bookRepository.findByBookId(bookId);
         if(!optionalBook.isPresent()){
             throw new DataNotFoundException("Book is not present ");
         }
@@ -74,7 +95,7 @@ public class BookService {
     }
 
     public BookDto updateBookDetails(Book book,Integer bookId) {
-        Optional<Book> optionalBook = Optional.ofNullable(bookRepository.findByBookId(bookId));
+        Optional<Book> optionalBook = bookRepository.findByBookId(bookId);
         if(!optionalBook.isPresent()){
             throw new DataNotFoundException("Book is not present ");
         }

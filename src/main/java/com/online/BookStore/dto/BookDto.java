@@ -1,6 +1,7 @@
 package com.online.BookStore.dto;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class BookDto {
     private Integer bookId;
@@ -102,5 +103,25 @@ public class BookDto {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BookDto bookDto = (BookDto) o;
+        return Double.compare(bookDto.price, price) == 0 &&
+                Objects.equals(bookId, bookDto.bookId) &&
+                Objects.equals(title, bookDto.title) &&
+                Objects.equals(author, bookDto.author) &&
+                Objects.equals(pages, bookDto.pages) &&
+                Objects.equals(description, bookDto.description) &&
+                Objects.equals(published, bookDto.published) &&
+                Objects.equals(quantity, bookDto.quantity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(bookId, title, author, pages, description, published, price, quantity);
     }
 }
