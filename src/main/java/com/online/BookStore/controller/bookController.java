@@ -23,12 +23,12 @@ public class bookController {
     public String addBook(@Valid @RequestBody Book book) throws Exception {
         return bookService.addBook(book);
     }
-
+/*
     @RequestMapping(method = RequestMethod.POST, value="/addManyBooks")
     public String addManyBooks(@Valid @RequestBody List<Book> bookList) throws Exception {
         return bookService.addManyBooks(bookList);
     }
-
+*/
     @RequestMapping("/{bookId}")
     public BookDto getBookDetails(@PathVariable Integer bookId) throws NotFoundException
     {

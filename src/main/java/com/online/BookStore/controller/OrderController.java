@@ -16,6 +16,9 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
+    }
 
     @RequestMapping("/getOrderDetails/{orderId}")
     public OrderResponse getOrderDetails(@PathVariable Integer orderId){

@@ -27,7 +27,7 @@ dependencies {
 	compile('org.modelmapper:modelmapper:1.1.0')
 	compile('org.hibernate:hibernate-java8:5.1.0.Final')
 
-	compile 'org.codehaus.groovy:groovy-all:2.5.8'
+	testImplementation 'org.codehaus.groovy:groovy-all:3.0.4'
 	testCompile platform("org.spockframework:spock-bom:2.0-M1-groovy-2.5")
 	testCompile "org.spockframework:spock-core"
 	testCompile 'junit:junit:4.12'

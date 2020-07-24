@@ -43,7 +43,7 @@ public class BookService {
        return new BookDto(newBook.getBookId(),newBook.getTitle(),newBook.getAuthor(),
                newBook.getPages(),newBook.getDescription(),newBook.getPublished(),newBook.getPrice());
     }
-
+/*
     public String addManyBooks(List<Book> bookList) throws Exception {
         List<String> title= new ArrayList<>();
         for (int i = 0; i < bookList.size(); i++) {
@@ -67,7 +67,7 @@ public class BookService {
       }
        return "Saved all books!";
     }
-
+*/
     public List<BookDto> getListOfBooks() {
 
        Optional<List<Book>> bookListOptional= Optional.ofNullable(bookRepository.findAll());

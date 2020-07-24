@@ -163,7 +163,7 @@ class OrderServiceTest extends Specification {
         then:
         result == 0
     }
-
+/*
     def "test calculatetotalPrice when price or quantity contain null"() {
         given:
 
@@ -175,7 +175,7 @@ class OrderServiceTest extends Specification {
         then:
         thrown(DataNotFoundException)
     }
-
+*/
     def "test getAllOrderDetailsOfCustomer when customerID is valid"() {
         given:
         Integer customerId = 1
@@ -213,6 +213,7 @@ class OrderServiceTest extends Specification {
         then:
         thrown(DataNotFoundException)
     }
+    /*
 
     def "testingDeleteOrder with a valid Order id"() {
         given:
@@ -229,6 +230,8 @@ class OrderServiceTest extends Specification {
         then:
         result == "Deleted Successfully"
     }
+
+     */
 
 
     def "testingDeleteOrder with a invalid order id"() {

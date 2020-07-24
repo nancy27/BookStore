@@ -65,7 +65,7 @@ class BookServiceTest extends Specification {
         then:
         thrown(DataNotFoundException)
     }
-
+/*
     def "testing add many books when the list is valid "(){
         Book book = new Book(1, "Speaking JavaScript", "Axel Rauschmayer", 460, "Like it or not, JavaScript is everywhere ", new Date(), 1232.00)
         List<Book> bookList= new ArrayList<>(Arrays.asList(book))
@@ -88,6 +88,8 @@ class BookServiceTest extends Specification {
         thrown(Exception)
     }
 
+
+ */
     def"testing get list of Books from db when all are retrieved"(){
         given:
         Book book = new Book(1, "Speaking JavaScript", "Axel Rauschmayer", 460, "Like it or not, JavaScript is everywhere ", new Date(), 1232.00)
